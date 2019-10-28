@@ -200,12 +200,13 @@ else_stmt:
 
 stmts :
         print_stmt | self_call_stmt | sender_call_stmt | method_call_stmt | dec_stmt SEMICOLON
-        | inc_stmt SEMICOLON | assign_stmt SEMICOLON | for_stmt | scope_stmt  | break_stmt | continue_stmt
+        | inc_stmt SEMICOLON | expression_assign SEMICOLON | for_stmt | scope_stmt  | break_stmt | continue_stmt
         | var_declaration_stmt  | if_stmt ;
 
 
 expression: expression00 | ternaryExpression;
-expression00 : expression0 | {System.out.print("Operator:=\n");} assign_stmt;
+expression_assign: {System.out.print("Operator:=\n");} assign_stmt ;
+expression00 : expression0 | expression_assign ;
 expression0 : expression1 | {System.out.print("Operator:||\n");} expression1 OR expression0;
 expression1 : expression2 | {System.out.print("Operator:&&\n");} expression2 AND expression1;
 expression2 : expression3 | {System.out.print("Operator:==\n");} expression3 EQUAL expression2 |
